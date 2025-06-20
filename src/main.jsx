@@ -14,9 +14,12 @@ createRoot(document.getElementById('root')).render(
     {/* <App /> */}
 
     <IntroComponent/>
-    {/* <ProjectsComponent/>
+      <div style={{ height: '300vh', background: '#ccc' }}>
+    <h2>Scroll content starts here</h2>
+  </div>
+    <ProjectsComponent/>
     <AboutComponent/>
-    <ContactComponent/> */}
+    <ContactComponent/>
     
   </StrictMode>,
 )
