@@ -3,3 +3,21 @@
   overflow: hidden;
   position: relative;
 }
+
+.panel-wrapper {
+  display: flex;
+  height: 100%;
+  width: fit-content;
+}
+
+.panel {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  background-color: #f5f5f5;
+  border-right: 1px solid #ddd;
+  font-weight: bold;
+}

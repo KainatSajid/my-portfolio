@@ -14,9 +14,9 @@ createRoot(document.getElementById('root')).render(
     {/* <App /> */}
 
     <IntroComponent/>
-    <ProjectsComponent/>
+    {/* <ProjectsComponent/>
     <AboutComponent/>
-    <ContactComponent/>
+    <ContactComponent/> */}
     
   </StrictMode>,
 )
