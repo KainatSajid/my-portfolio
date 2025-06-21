@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import styles from './about.module.css'
 
 
 
@@ -8,10 +8,11 @@ function AboutComponent() {
 
   return (
     <>
-      <div>
-        <h1>About Component</h1>
+      <div className={styles['about-container']} >
+        <div>
+          <h1>About Component</h1>
+        </div>
       </div>
-
     </>
   )
 }

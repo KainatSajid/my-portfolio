@@ -9,44 +9,44 @@ function IntroComponent() {
   const containerRef = useRef(null)
   const panelWrapperRef = useRef(null)
 
-useEffect(() => {
-  const panelWrapper = panelWrapperRef.current
-  const panels = panelWrapper.querySelectorAll(`.${styles.panel}`)
-  const firstPanel = panels[0]
+  useEffect(() => {
+    if (!containerRef.current || !panelWrapperRef.current) return
 
-  // Set opacity to 0 initially
-  gsap.set(firstPanel, { opacity: 0 })
+    const panelWrapper = panelWrapperRef.current
+    const panels = panelWrapper.querySelectorAll(`.${styles.panel}`)
+    const firstPanel = panels[0]
 
-  // Fade in first panel
-  const introFade = gsap.to(firstPanel, {
-    opacity: 1,
-    duration: 1.5,
-    ease: 'power2.out',
-  })
+    // Set first panel opacity to 0 initially
+    gsap.set(firstPanel, { opacity: 0 })
 
-  // Horizontal scroll
-  const scrollTween = gsap.to(panels, {
-    xPercent: -100 * (panels.length - 1),
-    ease: 'none',
-    scrollTrigger: {
-      trigger: containerRef.current,
-      pin: true,
-      scrub: 1,
-      start: 'top top',
-      end: () => '+=' + (panelWrapper.scrollWidth - 1),
-      anticipatePin: 1,
-    },
-  })
+    // Fade-in animation for first panel
+    gsap.to(firstPanel, {
+      opacity: 1,
+      duration: 2,
+      ease: 'expo.in',
+    })
 
-  // Refresh to make sure ScrollTrigger calculates correctly
-  requestAnimationFrame(() => ScrollTrigger.refresh())
+    // Horizontal scroll animation
+    const scrollTween = gsap.to(panels, {
+      xPercent: -100 * (panels.length - 1),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        pin: true,
+        scrub: 1,
+        start: 'top top',
+        end: () => '+=' + panelWrapper.scrollWidth,
+        anticipatePin: 1,
+      },
+    })
 
-  return () => {
-    scrollTween.scrollTrigger?.kill()
-  }
-}, [])
+    // Refresh ScrollTrigger to recalc measurements
+    requestAnimationFrame(() => ScrollTrigger.refresh())
 
-
+    return () => {
+      scrollTween.scrollTrigger?.kill()
+    }
+  }, [])
 
   return (
     <div className={styles['intro-container']} ref={containerRef}>

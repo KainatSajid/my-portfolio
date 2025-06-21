@@ -1,0 +1,10 @@
+.about-container {
+  padding-top: 10vh; 
+  height: 100%;
+  width: 100%;
+  margin:0; 
+  border:red solid 2px;
+  /* position: relative;
+  overflow: hidden; */
+  /* border: purple solid 10px; */
+}
