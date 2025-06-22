@@ -1,30 +1,373 @@
+/* intro.module.css */
 .intro-container {
-  height: 100%;
-  width: 100%;
-  margin:0; 
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
   position: relative;
   overflow: hidden;
-  /* border: purple solid 10px; */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --pause-opacity: 0;
 }
+
+/* Optional: Add a subtle indicator during pause */
+/* .intro-container::after {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  opacity: var(--pause-opacity);
+  transition: opacity 0.3s ease;
+  z-index: 100;
+} */
+
+/* .intro-container::before {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+  opacity: var(--pause-opacity);
+  transition: opacity 0.3s ease;
+  z-index: 101;
+  animation: pauseIndicator 2s ease-in-out infinite;
+} */
 
 .panel-wrapper {
   display: flex;
   height: 100%;
   width: fit-content;
+  position: relative;
+  will-change: transform; /* Optimize for animations */
 }
 
+/* TEXT PANELS - Main content (z-index: 5, normal horizontal scroll speed) */
 .panel {
   min-width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 4rem;
-  background-color: lightblue;
-  border-right: 1px solid #ddd;
+  background-color: transparent;
   font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 5; /* Middle layer - main content */
+  will-change: transform;
+}
+
+.panel-content {
+  position: relative;
+  text-align: center;
+  user-select: none;
 }
 
 .panel:first-child {
-  opacity: 0; /* GSAP will animate this */
+  opacity: 1;
+}
+
+.logo-placeholder {
+  font-size: 2rem;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  border: 2px solid white;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.logo-placeholder:hover {
+  transform: scale(1.05);
+}
+
+/* BASE PARALLAX ELEMENT STYLES */
+.parallax-element {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform; /* Optimize for smooth animations */
+}
+
+/* BACKGROUND PARALLAX ELEMENTS - Different Z-indexes and slower speeds */
+
+/* Slowest background layer (z-index: 1, 30% speed) */
+.bg-slowest {
+  z-index: 1;
+}
+
+/* Medium background layer (z-index: 2, 50% speed) */
+.bg-medium {
+  z-index: 2;
+}
+
+/* Fast background layer (z-index: 3, 70% speed) */
+.bg-fast {
+  z-index: 3;
+}
+
+/* Background element positioning - strategically placed across panels */
+.bg-circle-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  top: 15%;
+  left: 20vw; /* First panel */
+  backdrop-filter: blur(20px);
+  animation: float 6s ease-in-out infinite;
+}
+
+.bg-circle-2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+  bottom: 20%;
+  left: 150vw; /* Second panel */
+  backdrop-filter: blur(15px);
+  animation: float 4s ease-in-out infinite reverse;
+}
+
+.bg-shape-1 {
+  top: 40%;
+  left: 80vw; /* Between first and second panel */
+}
+
+.bg-shape-2 {
+  bottom: 30%;
+  left: 50vw; /* First panel */
+}
+
+.bg-shape-3 {
+  top: 60%;
+  left: 180vw; /* Second panel */
+}
+
+.bg-shape-4 {
+  top: 25%;
+  left: 250vw; /* Third panel */
+}
+
+.image-placeholder {
+  width: 200px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.6);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* FOREGROUND PARALLAX ELEMENTS - Different Z-indexes and faster speeds */
+
+/* Medium fast foreground layer (z-index: 8, 130% speed) */
+.fg-medium {
+  z-index: 8;
+}
+
+/* Fast foreground layer (z-index: 9, 160% speed) */
+.fg-fast {
+  z-index: 9;
+}
+
+/* Fastest foreground layer (z-index: 10, 200% speed) */
+.fg-fastest {
+  z-index: 10;
+}
+
+/* Foreground element positioning - distributed across all panels */
+.fg-element-1 {
+  top: 20%;
+  left: 30vw; /* First panel */
+}
+
+.fg-element-2 {
+  bottom: 30%;
+  left: 70vw; /* End of first panel */
+}
+
+.fg-element-3 {
+  top: 60%;
+  left: 120vw; /* Second panel */
+}
+
+.fg-element-4 {
+  bottom: 15%;
+  left: 170vw; /* Between second and third panel */
+}
+
+.fg-element-5 {
+  top: 30%;
+  left: 220vw; /* Third panel */
+}
+
+.fg-element-6 {
+  bottom: 50%;
+  left: 90vw; /* Between panels */
+}
+
+.foreground-image {
+  font-size: 5rem;
+  animation: zoom 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+  opacity: 0.9;
+}
+
+/* ANIMATIONS */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(5deg);
+  }
+}
+
+@keyframes zoom {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(10deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pauseIndicator {
+  0%, 100% {
+    width: 40px;
+    opacity: 0.8;
+  }
+  50% {
+    width: 60px;
+    opacity: 1;
+  }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .panel {
+    font-size: 2.5rem;
+  }
+  
+  .logo-placeholder {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .bg-circle-1 {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .bg-circle-2 {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .foreground-image {
+    font-size: 4rem;
+  }
+  
+  .image-placeholder {
+    width: 150px;
+    height: 120px;
+    font-size: 2rem;
+  }
+  
+  /* Adjust positioning for smaller screens */
+  .bg-shape-1 { left: 60vw; }
+  .bg-shape-2 { left: 40vw; }
+  .bg-shape-3 { left: 140vw; }
+  .bg-shape-4 { left: 200vw; }
+  
+  .fg-element-1 { left: 25vw; }
+  .fg-element-2 { left: 55vw; }
+  .fg-element-3 { left: 95vw; }
+  .fg-element-4 { left: 135vw; }
+  .fg-element-5 { left: 175vw; }
+  .fg-element-6 { left: 75vw; }
+}
+
+@media (max-width: 480px) {
+  .panel {
+    font-size: 2rem;
+  }
+  
+  .logo-placeholder {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  .bg-circle-1 {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .bg-circle-2 {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .foreground-image {
+    font-size: 3rem;
+  }
+  
+  .image-placeholder {
+    width: 120px;
+    height: 100px;
+    font-size: 1.5rem;
+  }
+  
+  /* Further adjust positioning for mobile */
+  .bg-shape-1 { left: 50vw; }
+  .bg-shape-2 { left: 30vw; }
+  .bg-shape-3 { left: 120vw; }
+  .bg-shape-4 { left: 170vw; }
+  
+  .fg-element-1 { left: 20vw; }
+  .fg-element-2 { left: 45vw; }
+  .fg-element-3 { left: 80vw; }
+  .fg-element-4 { left: 115vw; }
+  .fg-element-5 { left: 150vw; }
+  .fg-element-6 { left: 65vw; }
+}
+
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.intro-container * {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
