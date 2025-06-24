@@ -1,10 +1,266 @@
+/* about.module.css */
 .about-container {
-  padding-top: 10vh; 
-  height: 100%;
+  padding-top: 10vh;
+  height: 100vh;
   width: 100%;
-  margin:0; 
-  border:red solid 2px;
-  /* position: relative;
-  overflow: hidden; */
-  /* border: purple solid 10px; */
+  margin: 0;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.about-content {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* Header Section */
+.about-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.about-header h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 0 0 2rem 0;
+  color: #ffffff;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  background: linear-gradient(45deg, #ffffff, #cccccc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #b0b0b0;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Buttons Section */
+.buttons-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4rem;
+  margin-top: 2rem;
+}
+
+.button-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.button-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Button Images */
+.button-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  background: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.button-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.button-image.hovered {
+  transform: scale(1.1);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.button-image.hovered::before {
+  transform: translateX(100%);
+}
+
+.image-placeholder {
+  font-size: 4rem;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
+}
+
+.button-image.hovered .image-placeholder {
+  opacity: 1;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
+}
+
+/* Button Text */
+.button-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #cccccc;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+}
+
+.button-text.text-hovered {
+  color: #ffffff;
+  transform: scale(1.05);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Button Positioning */
+.left-button {
+  justify-self: flex-start;
+}
+
+.right-button {
+  justify-self: flex-end;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .about-content {
+    padding: 0 2rem;
+    gap: 3rem;
+  }
+  
+  .buttons-section {
+    gap: 2rem;
+  }
+  
+  .button-image {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .image-placeholder {
+    font-size: 3rem;
+  }
+  
+  .about-header h1 {
+    font-size: 3rem;
+  }
+  
+  .about-description {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    height: auto;
+    min-height: 100vh;
+    padding-top: 5vh;
+  }
+  
+  .about-content {
+    padding: 0 1rem;
+    gap: 2rem;
+  }
+  
+  .buttons-section {
+    flex-direction: column;
+    gap: 3rem;
+    margin-top: 1rem;
+  }
+  
+  .button-container {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .button-image {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .image-placeholder {
+    font-size: 3.5rem;
+  }
+  
+  .about-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .about-description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .button-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-content {
+    padding: 0 0.5rem;
+  }
+  
+  .button-image {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .image-placeholder {
+    font-size: 3rem;
+  }
+  
+  .about-header h1 {
+    font-size: 2rem;
+  }
+  
+  .about-description {
+    font-size: 0.9rem;
+  }
+  
+  .button-text {
+    font-size: 1rem;
+  }
+}
+
+/* Additional hover effects for desktop */
+@media (hover: hover) {
+  .button-container:active {
+    transform: translateY(-3px) scale(0.98);
+  }
+  
+  .button-image:hover {
+    background: linear-gradient(45deg, #333333, #2a2a2a);
+  }
 }
