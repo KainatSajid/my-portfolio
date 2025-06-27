@@ -72,20 +72,30 @@
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
 }
 
-/* Animation States */
-.slide-in {
-  transform: translateX(0);
+/* Text Animation States */
+.text-fade-in {
   opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.slide-out-right {
-  transform: translateX(100%);
+.text-fade-out {
   opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.slide-out-left {
-  transform: translateX(-100%);
+/* Text Animation States */
+.text-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-fade-out {
   opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Navigation Buttons */

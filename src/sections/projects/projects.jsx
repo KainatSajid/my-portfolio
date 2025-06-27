@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styles from './projects.module.css'
 
 // Projects data structure
@@ -49,6 +49,8 @@ function ProjectsComponent() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const [slideDirection, setSlideDirection] = useState('right')
+  const [textVisible, setTextVisible] = useState(true)
+  const [imageTransform, setImageTransform] = useState('translateX(0)')
 
   const currentProject = projectsData[currentIndex]
 
@@ -56,8 +58,24 @@ function ProjectsComponent() {
     if (isAnimating) return
     setIsAnimating(true)
     setSlideDirection('right')
+    setTextVisible(false)
+    
+    // Slide current image out to the right
+    setImageTransform('translateX(100%)')
+    
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % projectsData.length)
+      // Position new image off-screen to the left
+      setImageTransform('translateX(-100%)')
+    }, 150)
+    
+    setTimeout(() => {
+      // Slide new image in from the left
+      setImageTransform('translateX(0)')
+      setTextVisible(true)
+    }, 160) // Small delay to ensure positioning
+    
+    setTimeout(() => {
       setIsAnimating(false)
     }, 300)
   }
@@ -66,8 +84,24 @@ function ProjectsComponent() {
     if (isAnimating) return
     setIsAnimating(true)
     setSlideDirection('left')
+    setTextVisible(false)
+    
+    // Slide current image out to the left
+    setImageTransform('translateX(-100%)')
+    
     setTimeout(() => {
       setCurrentIndex((prev) => (prev - 1 + projectsData.length) % projectsData.length)
+      // Position new image off-screen to the right
+      setImageTransform('translateX(100%)')
+    }, 150)
+    
+    setTimeout(() => {
+      // Slide new image in from the right
+      setImageTransform('translateX(0)')
+      setTextVisible(true)
+    }, 160) // Small delay to ensure positioning
+    
+    setTimeout(() => {
       setIsAnimating(false)
     }, 300)
   }
@@ -83,9 +117,11 @@ function ProjectsComponent() {
         <div className={styles['image-section']}>
           <div className={styles['image-container']}>
             <div 
-              className={`${styles['project-image']} ${
-                isAnimating ? styles[`slide-out-${slideDirection}`] : styles['slide-in']
-              }`}
+              className={styles['project-image']}
+              style={{ 
+                transform: imageTransform,
+                opacity: imageTransform === 'translateX(0)' ? 1 : 0
+              }}
               key={currentProject.id}
             >
               <div className={styles['image-placeholder']}>
@@ -115,7 +151,7 @@ function ProjectsComponent() {
 
         {/* Right Section - Text Content */}
         <div className={styles['text-section']}>
-          <div className={styles['project-content']}>
+          <div className={`${styles['project-content']} ${textVisible ? styles['text-fade-in'] : styles['text-fade-out']}`}>
             <h2 className={styles['project-title']}>{currentProject.title}</h2>
             
             <div className={styles['info-section']}>
@@ -141,7 +177,7 @@ function ProjectsComponent() {
           </div>
           
           {/* Project Counter */}
-          <div className={styles['project-counter']}>
+          <div className={`${styles['project-counter']} ${textVisible ? styles['text-fade-in'] : styles['text-fade-out']}`}>
             {currentIndex + 1} / {projectsData.length}
           </div>
         </div>
